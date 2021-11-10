@@ -18,7 +18,7 @@ const corsOptions = {
   credentials: true,
   optionSuccessStatus: 200,
 }
-//lol
+
 
 //middleware
 mongoose.connect(DB, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
@@ -46,11 +46,11 @@ app.all('/:tbs', async (req,res) => {
 })
 
 const ask_for_summary = async(search_key) =>  {
-  //var final_summary = await get_summary(search_key)
-  const record = {keyword: search_key, summary: 'Lol Dude'}
+  var final_summary = await get_summary(search_key)
+  const record = {keyword: search_key, summary: final_summary}
   const response = await Todo.create(record)
   console.log(response)
-  return 'Lol Dude'
+  return final_summary
 }
 
 
