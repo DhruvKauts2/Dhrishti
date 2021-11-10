@@ -1,0 +1,30 @@
+{
+  "name": "Dhrishti",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DhruvKauts2/Dhrishti.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DhruvKauts2/Dhrishti/issues"
+  },
+  "homepage": "https://github.com/DhruvKauts2/Dhrishti#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12",
+    "nodemon": "^2.0.15"
+  },
+  "engines": {
+    "node": "14.17.4"
+  }
+}

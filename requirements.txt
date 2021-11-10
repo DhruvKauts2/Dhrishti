@@ -1,0 +1,5 @@
+summarizer
+bert-extractive-summarizer
+newspaper3k
+spacy
+transformers
