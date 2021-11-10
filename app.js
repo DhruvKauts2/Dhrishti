@@ -18,7 +18,7 @@ const corsOptions = {
   credentials: true,
   optionSuccessStatus: 200,
 }
-
+//lol
 
 //middleware
 mongoose.connect(DB, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
@@ -34,7 +34,7 @@ app.all('/:tbs', async (req,res) => {
     const records = await Todo.findOne({keyword:tbs})
     if(records == null || records.length == 0 ){
       
-        var final_summary = await ask_for_summary(tbs).catch((err) => {console.log(err)})
+        var final_summary = await ask_for_summary(tbs)
         res.send(`${final_summary}`)
     }
     else{
@@ -46,9 +46,9 @@ app.all('/:tbs', async (req,res) => {
 })
 
 const ask_for_summary = async(search_key) =>  {
-  var final_summary = await get_summary(search_key).catch((err) => {console.log(err)})
+  var final_summary = await get_summary(search_key)
   const record = {keyword: search_key, summary: final_summary}
-  const response = await Todo.create(record).catch((err) => {console.log(err)})
+  const response = await Todo.create(record)
   console.log(response)
   return final_summary
 }
@@ -57,13 +57,13 @@ const ask_for_summary = async(search_key) =>  {
 const get_summary = async(search_key) =>{ //this function takes the keyword as parameter and returns the summary
    var summary;
   
-   const childPython = await spawn('python', ['bert_summary.py', 'https://en.wikipedia.org/wiki/' + search_key]).catch((err) => {console.log(err)});
+   const childPython = await spawn('python', ['bert_summary.py', 'https://en.wikipedia.org/wiki/' + search_key]);
  
    childPython.stdout.on('data', (data) => {
        summary = data;
    });
  
-   await once(childPython, 'close').catch((err) => {console.log(err)});
+   await once(childPython, 'close');
    console.log(`${summary}`)
    return summary;
 }
