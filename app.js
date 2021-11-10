@@ -46,11 +46,11 @@ app.all('/:tbs', async (req,res) => {
 })
 
 const ask_for_summary = async(search_key) =>  {
-  var final_summary = await get_summary(search_key)
-  const record = {keyword: search_key, summary: final_summary}
+  //var final_summary = await get_summary(search_key)
+  const record = {keyword: search_key, summary: 'Lol Dude'}
   const response = await Todo.create(record)
   console.log(response)
-  return final_summary
+  return 'Lol Dude'
 }
 
 
