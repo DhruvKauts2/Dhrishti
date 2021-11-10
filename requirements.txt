@@ -1,5 +1,5 @@
-summarizer
-bert-extractive-summarizer
-newspaper3k
-spacy
-transformers
+summarizer==0.0.7
+bert-extractive-summarizer==0.8.1
+newspaper3k==0.2.8
+spacy==3.2.0
+transformers==4.12.3
