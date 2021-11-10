@@ -18,7 +18,7 @@ const corsOptions = {
   credentials: true,
   optionSuccessStatus: 200,
 }
-
+//lol
 
 //middleware
 mongoose.connect(DB, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
