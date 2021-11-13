@@ -17,7 +17,6 @@ const corsOptions = {
   credentials: true,
   optionSuccessStatus: 200,
 }
-//lol
 
 //middleware
 mongoose.connect(DB, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
@@ -34,34 +33,28 @@ app.all('/:tbs', async (req,res) => {
     const {tbs} = req.params
     const records = await Todo.findOne({keyword:tbs})
     if(records == null || records.length == 0 ){
-      
         var final_summary = await ask_for_summary(tbs)
         res.send(`${final_summary}`)
     }
     else{
       res.send(records.summary)
     }
-    
-    
-    
 })
 
 app.post('/api/stuff', async(req, res, next) => {
   var token = req.body["token"];
   var text = req.body["text"];
   console.log(token);
-  //console.log(text);
-
-  const records = await Todo.findOne({keyword: token})
-    if(records == null || records.length == 0 ){
-      
-        var final_summary = await ask_for_summary(token,text)
-        res.send(`${final_summary}`)
-    }
-    else{
-      res.send(records.summary)
-    }
-
+  console.log(text)
+  const records = await Todo.findOne({keyword : token})
+  console.log(records)
+  if(records == null || records.length == 0 ){
+    var final_summary = await ask_for_summary(token, text);
+    res.send(`${final_summary}`)
+}
+else{
+  res.send(records.summary)
+}
   res.status(201).send('Created Succesfully');
 });
 
@@ -70,26 +63,19 @@ const ask_for_summary = async(search_token, search_text) =>  {
   const record = {keyword: search_token, summary: final_summary}
   const response = await Todo.create(record)
   console.log(response)
-  return final_summary
+  return final_summary;
 }
-
 
 const get_summary = async(search_text) =>{ //this function takes the keyword as parameter and returns the summary
    var summary;
-  
    const childPython = await spawn('python', ['bert_summary.py', search_text]);
- 
    childPython.stdout.on('data', (data) => {
        summary = data;
    });
- 
    await once(childPython, 'close');
    console.log(`${summary}`)
    return summary;
 }
-
-
-
 
 app.listen(port,()=> {
   console.log('server is running on port 5000')
